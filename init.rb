@@ -1,4 +1,4 @@
-require 'omniauth-gitlab'
+require 'redmine_gitlab_omniauth'
 
 Redmine::Plugin.register :redmine_gitlab_omniauth do
   name 'Redmine Gitlab Omniauth plugin'
@@ -11,15 +11,5 @@ Redmine::Plugin.register :redmine_gitlab_omniauth do
            partial: 'settings/gitlab_setting'
 end
 
-setting = Setting['plugin_redmine_gitlab_omniauth']
-
-unless setting['app_id']
-  Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :gitlab, setting['app_id'], setting['secret'],
-             client_options: {
-               site: setting['url'],
-               authorize_url: '/oauth/authorize',
-               token_url: '/oauth/token'
-             }
-  end
-end
+include RedmineGitlabOmniauth
+use_middleware
