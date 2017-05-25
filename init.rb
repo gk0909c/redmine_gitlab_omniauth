@@ -1,3 +1,5 @@
+require 'omniauth-gitlab'
+
 Redmine::Plugin.register :redmine_gitlab_omniauth do
   name 'Redmine Gitlab Omniauth plugin'
   author 'gk0909c'
