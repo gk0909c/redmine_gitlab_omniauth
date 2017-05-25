@@ -1,0 +1,16 @@
+<div>
+  please save your gitlab info as oauth provider
+</div>
+
+<p>
+  <label>Gitlab URL:</label>
+  <%= text_field_tag 'settings[url]', @settings['url'] %>
+</p>
+<p>
+  <label>Application Id:</label>
+  <%= text_field_tag 'settings[client_id]', @settings['app_id'] %>
+</p>
+<p>
+  <label>Secret:</label>
+  <%= text_field_tag 'settings[secret]', @settings['secret'] %>
+</p>
