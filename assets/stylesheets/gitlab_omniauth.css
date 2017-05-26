@@ -1,0 +1,13 @@
+.gitlab-auth {
+  text-align: center;
+  margin: 1rem auto;
+  width: 340px;
+}
+
+.gitlab-auth > a {
+  background-color: rgb(255, 118, 0);
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  color: white;
+  text-decoration: none;
+}
