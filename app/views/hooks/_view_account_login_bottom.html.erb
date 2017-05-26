@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag 'gitlab_omniauth', :plugin => 'redmine_gitlab_omniauth' %>
+
+<% if setting_complete? %>
+  <div class="gitlab-auth">
+    <%= link_to 'Gitlabで認証', '/auth/gitlab' %>
+  </div>
+<% end %>
+
