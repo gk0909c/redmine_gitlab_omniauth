@@ -11,11 +11,31 @@ module RedmineGitlabOmniauth
 
     Rails.application.config.middleware.use OmniAuth::Builder do
       provider :gitlab, setting['app_id'], setting['secret'],
-               client_options: {
-                 site: setting['url'],
-                 authorize_url: '/oauth/authorize',
-                 token_url: '/oauth/token'
-               }
+               client_options: gitlab_client_options(setting['url'])
+
+      set_on_failure
+    end
+  end
+
+  private
+
+  def gitlab_client_options(url)
+    {
+      site: url,
+      authorize_url: '/oauth/authorize',
+      token_url: '/oauth/token'
+    }
+  end
+
+  def set_on_failure
+    OmniAuth.config.on_failure do |env|
+      endpoint = '/auth/gitlab/failure'
+      endpoint << "?error_reason=#{env['omniauth.error'].error_reason}"
+      [
+        302,
+        { 'Location' => endpoint, 'Content-Type' => 'text/html' },
+        []
+      ]
     end
   end
 end
