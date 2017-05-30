@@ -36,9 +36,9 @@ class RedmineGitlabOmniauthControllerTest < ActionController::TestCase
   end
 
   test 'failure action' do
-    get(:failure, error_reason: 'error test')
+    get(:failure, error_type: 'error test')
     assert_redirected_to signin_path
-    assert_equal('error test', flash[:error])
+    assert_match(/.+error\stest/, flash[:error])
   end
 
   private

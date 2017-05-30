@@ -30,7 +30,7 @@ module RedmineGitlabOmniauth
   def set_on_failure
     OmniAuth.config.on_failure do |env|
       endpoint = '/auth/gitlab/failure'
-      endpoint << "?error_reason=#{env['omniauth.error'].error_reason}"
+      endpoint << "?error_type=#{env['omniauth.error.type']}"
       [
         302,
         { 'Location' => endpoint, 'Content-Type' => 'text/html' },

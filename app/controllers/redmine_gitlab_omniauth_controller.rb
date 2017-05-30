@@ -11,7 +11,7 @@ class RedmineGitlabOmniauthController < ApplicationController
   end
 
   def failure
-    flash[:error] = params[:error_reason]
+    flash[:error] = "authenticate error, gitlab return #{params[:error_type]}"
     redirect_to signin_path
   end
 

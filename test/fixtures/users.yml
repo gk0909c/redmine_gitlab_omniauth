@@ -1,0 +1,10 @@
+--- 
+admin_user: 
+  # password = admin
+  hashed_password: b5b6ff9543bf1387374cdfa27a54c96d236a7150
+  admin: true
+  lastname: Admin
+  firstname: Redmine
+  login: admin
+  type: User
+  id: 1

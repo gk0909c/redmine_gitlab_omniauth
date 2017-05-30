@@ -1,0 +1,9 @@
+--- 
+gitlab_settings:
+  name: plugin_redmine_gitlab_omniauth
+  value: |
+    ---
+    url: http://test.com
+    app_id: test_app_id
+    secret: test_secret
+
