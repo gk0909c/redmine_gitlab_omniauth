@@ -2,22 +2,26 @@ require 'omniauth-gitlab'
 
 # use gitlab-omniauth as middleware
 module RedmineGitlabOmniauth
-  include AccountHelperPatch
-
   def use_middleware
-    return unless setting_complete?
-
-    setting = Setting['plugin_redmine_gitlab_omniauth']
-
     Rails.application.config.middleware.use OmniAuth::Builder do
-      provider :gitlab, setting['app_id'], setting['secret'],
-               client_options: gitlab_client_options(setting['url'])
+      provider :gitlab, setup: omniauth_setup_proc
 
       set_on_failure
     end
   end
 
   private
+
+  def omniauth_setup_proc
+    setting = Setting.plugin_redmine_gitlab_omniauth
+
+    lambda do |env|
+      options = env['omniauth.strategy'].options
+      options[:client_id] = setting['app_id']
+      options[:client_secret] = setting['secret']
+      options[:client_options] = gitlab_client_options(setting['url'])
+    end
+  end
 
   def gitlab_client_options(url)
     {

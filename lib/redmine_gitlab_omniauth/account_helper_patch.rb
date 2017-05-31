@@ -2,7 +2,7 @@ module RedmineGitlabOmniauth
   # helper patch to account
   module AccountHelperPatch
     def setting_complete?
-      !Setting['plugin_redmine_gitlab_omniauth']['app_id'].nil?
+      Setting['plugin_redmine_gitlab_omniauth']['app_id'].present?
     end
   end
 end

@@ -7,6 +7,7 @@ class IntegrationTest < ActionDispatch::IntegrationTest
 
   def setup
     super
+    Setting.clear_cache
   end
 
   test 'gitlab auth link is invisible until setting complete' do
@@ -28,7 +29,7 @@ class IntegrationTest < ActionDispatch::IntegrationTest
                                name: 'first family',
                                email: 'test@example.com'
                              })
-    get_via_redirect('/auth/gitlab/callback')
+    get_via_redirect('/auth/gitlab')
 
     assert_equal '/', path
     assert_equal 'testuser', User.current.login
@@ -37,7 +38,7 @@ class IntegrationTest < ActionDispatch::IntegrationTest
   test 'gitlab failure callback' do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:gitlab] = :access_denied
-    get_via_redirect('/auth/gitlab/callback')
+    get_via_redirect('/auth/gitlab')
 
     assert_equal '/login', path
     assert User.current.is_a?(AnonymousUser)
