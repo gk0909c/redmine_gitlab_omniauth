@@ -1,15 +1,19 @@
 # redmine_gitlab_omniauth
-request omniauth from redmine to gitlab as provider
+request omniauth from redmine to gitlab as provider.  
+
+## usage 
+install this plugin to your redmine, and set gitlab info
+
+1. clone this repository to your redmine plugin folder
+2. restart redmine
+3. fill gitlab info in plugin congiguration page
+
+now, you can see gitlab auth button in login page.  
+this create user record when you login with gitlab auth as new redmine user.
 
 ## testing
-### unit and functions
 ```bash
-bundle exec rake redmine:plugins:test:units
-bundle exec rake redmine:plugins:test:functionals
+bundle exec rake redmine:plugins:test
 ```
 
-### intagration
-integration test using rack middleware fail when rake task, so excute with ruby command.
-```bash
-bundle exec ruby plugins/redmine_gitlab_omniauth/test/integration/integration_test.rb
-```
+see rake task for details
